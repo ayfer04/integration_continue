@@ -1,0 +1,26 @@
+## Test PHPStan analysis in GitHub Actions
+name: PHPStan Analysis
+on:
+  push:
+    branches: [ main ] #Déclenche le workflow à chaque push sur la branche main
+  pull_request:
+    branches: [ main ] #Déclenche aussi lors d'une pull request vers main
+
+jobs:
+  phpstan: # Nom du job (analyse du code avec PHPStan)
+    runs-on: ubuntu-latest # Exécute le job sur un runner Ubuntu hébergé par GitHub
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2 # Action officielle GitHub : clone le code du dépôt dans le runner pour qu'il soit accessible à PHPStan
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2 # Action qui installe PHP et configure l'environnement d'exécution
+        with:
+          php-version: '8.2' # Version de PHP utilisée pour analyser le code
+          extensions: mbstring # Installe l'extension mbstring (souvent requise par certaines libs PHP)
+
+      - name: Install dependencies
+        run: composer install  --no-progress --no-suggest --prefer-dist # Installe les dépendances du projet (y compris PHPStan) à partir de composer.json
+
+      - name: Run PHPStan
+        run: composer run stan-check # Exécute le script défini dans composer.json ; il lance généralement "phpstan analyse" pour vérifier le code

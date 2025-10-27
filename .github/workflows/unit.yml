@@ -1,27 +1,27 @@
 ## Tests for PHP code using PHPUnit
 
-name: PHP CI
+name: PHP CI #Nom workflow
 on:
   push:
-    branches: [ main ]
+    branches: [ main ] #Déclenche sur push vers main
   pull_request:
-    branches: [ main ]
+    branches: [ main ] #Déclenche sur PR vers main
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest #Runner Ubuntu hébergé par GitHub
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v2 #Récupère le code du repo dans le runner (obligatoire)
 
       - name: Setup PHP
-        uses: shivammathur/setup-php@v2
+        uses: shivammathur/setup-php@v2 #Installe PHP et configure l'env (peut aussi installer Composer)
         with:
-          php-version: '8.2'
+          php-version: '8.2' #Version de PHP utilisée
       
 
       - name: Install dependencies
-        run: composer install --prefer-dist --no-progress --no-suggest
+        run: composer install --prefer-dist --no-progress --no-suggest # Installe les dépendances (vendors)
 
       - name: Run tests
-        run: vendor/bin/phpunit
+        run: vendor/bin/phpunit # Lance PHPUnit (lit phpunit.xml / phpunit.xml.dist)

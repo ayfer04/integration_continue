@@ -1,0 +1,25 @@
+## Test PHP code style with PHP CS Fixer
+name: PHP CS Fixer #Nom du workflow
+on:
+  push:
+    branches: [ main ] #Déclenche le workflow à chaque push sur la branche main
+  pull_request:
+    branches: [ main ] #Déclenche aussi lors d’une pull request vers main
+
+jobs:
+  fix: #Nom du job (contrôle du style)
+    runs-on: ubuntu-latest #Le job s'exécute sur un runner Ubuntu hébergé par GitHub
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2 #Action officielle de GitHub : clone le dépôt dans le runner pour accéder au code source
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2 #Action qui installe PHP dans la version indiquée et configure l'environnement
+        with:
+          php-version: '8.2' #Version de PHP utilisée pour exécuter PHP CS Fixer
+
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-progress --no-suggest #Installe les dépendances du projet (y compris PHP CS Fixer) définies dans composer.json
+
+      - name: Run PHP CS Fixer
+        run: composer cs-check #Lance le script "cs-check" défini dans composer.json ; ce script exécute en général "php-cs-fixer fix --dry-run --diff" pour vérifier le style sans modifier les fichiers
