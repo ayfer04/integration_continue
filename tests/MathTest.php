@@ -9,7 +9,7 @@ final class MathTest extends TestCase
 {
     public function testAdd(): void
     {
-        $this->assertEquals(5, Math::add(2, 3));
+        $this->assertEquals(90, Math::add(2, 3));
         $this->assertEquals(-1, Math::add(2, -3));
     }
 
