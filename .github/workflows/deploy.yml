@@ -20,5 +20,5 @@ jobs:
 
       - name: Deploy to server
         run: |
-          scp -o StrictHostKeyChecking=no -r . ayfer@lesacteursduweb.fr:~/www_github/"
+          scp -o StrictHostKeyChecking=no -r . ayfer@lesacteursduweb.fr:~/www_github/
           
