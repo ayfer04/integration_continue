@@ -68,4 +68,4 @@ jobs:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
       - name: Déploiement sur le serveur distant
         run: |
-          scp -o StrictHostKeyChecking=no -r . ayfer@lesacteursduweb.fr:~/www_github/
+          rsync -az --delete \--exclude '.git' --exclude '.github' --exclude 'node_modules' \-e "ssh -o StrictHostKeyChecking=no" \./ \ayfer@lesacteursduweb.fr:~/www_github/integration_continue
