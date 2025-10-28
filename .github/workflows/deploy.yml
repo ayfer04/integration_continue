@@ -20,6 +20,5 @@ jobs:
 
       - name: Deploy to server
         run: |
-          ssh -o StrictHostKeyChecking=no ayfer@lesacteursduweb.fr "
-            echo "✔ yes man !!"
-          "
+          ssh -o StrictHostKeyChecking=no ayfer@lesacteursduweb.fr:~/www_github/www_github 
+            
