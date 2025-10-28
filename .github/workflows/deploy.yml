@@ -20,9 +20,6 @@ jobs:
 
       - name: Deploy to server
         run: |
-          ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@lesacteursduweb.fr "
-            cd ~/www_github &&
-            git pull origin main &&
-            composer install --no-dev &&
-            php artisan migrate --force
+          ssh -o StrictHostKeyChecking=no ayfer@lesacteursduweb.fr "
+            echo "✔ yes man !!"
           "
